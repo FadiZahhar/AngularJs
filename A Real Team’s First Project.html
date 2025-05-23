@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="taskCtrl">
+  <h2>Welcome to StartApp's Task Manager</h2>
+  <label>Your Name: <input ng-model="userName"></label>
+  <p>Hello, {{ userName }}!</p>
+
+  <h3>Task List</h3>
+  <input ng-model="newTask" placeholder="New Task">
+  <button ng-click="addTask()">Add Task</button>
+  <input ng-model="searchTask" placeholder="Search tasks">
+  <p>Total Tasks: {{ tasks.length }}</p>
+  <ul>
+    <li ng-repeat="task in tasks | filter:searchTask">{{ task }}</li>
+  </ul>
+</div>
+
+<script>
+  angular.module('myApp', [])
+    .controller('taskCtrl', function($scope) {
+      $scope.tasks = ["Design logo", "Setup database", "Write docs"];
+      $scope.addTask = function() {
+        if ($scope.newTask) {
+          $scope.tasks.push($scope.newTask);
+          $scope.newTask = "";
+        }
+      };
+    });
+</script>
+</body>
+</html>
