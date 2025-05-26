@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="formApp" ng-controller="formCtrl">
+  <form name="regForm">
+    <p>
+      Name: <input name="name" ng-model="user.name" required>
+      <span ng-show="regForm.name.$touched && regForm.name.$invalid">Required!</span>
+    </p>
+    <p>
+      Email: <input name="email" ng-model="user.email" required>
+      <span ng-show="regForm.email.$touched && regForm.email.$invalid">Required!</span>
+    </p>
+    <p>
+      Password: <input type="password" name="password" ng-model="user.password" ng-minlength="6" required>
+      <span ng-show="regForm.password.$touched && regForm.password.$invalid">Must be at least 6 characters!</span>
+    </p>
+    <button ng-disabled="regForm.$invalid">Submit</button>
+  </form>
+  <h4>Live Preview:</h4>
+  <p>Name: {{ user.name }}</p>
+  <p>Email: {{ user.email }}</p>
+</div>
+<script>
+angular.module('formApp', []).controller('formCtrl', function($scope) {
+  $scope.user = {};
+});
+</script>
+</body>
+</html>

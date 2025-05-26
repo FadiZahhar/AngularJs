@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="taskApp" ng-controller="taskCtrl">
+  <h3>Checklist</h3>
+  <input ng-model="newTask" placeholder="New Task">
+  <button ng-click="addTask()" ng-disabled="!newTask">Add Task</button>
+  <ul>
+    <li ng-repeat="task in tasks">{{ task }}</li>
+  </ul>
+  <p ng-show="tasks.length > 3">Great job! You're on fire!</p>
+</div>
+<script>
+  angular.module('taskApp', [])
+    .controller('taskCtrl', function($scope) {
+      $scope.tasks = ["Design logo", "Setup database"];
+      $scope.addTask = function() {
+        if ($scope.newTask) {
+          $scope.tasks.push($scope.newTask);
+          $scope.newTask = "";
+        }
+      }
+    });
+</script>
+</body>
+</html>

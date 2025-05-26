@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <style>
+    input.ng-invalid.ng-touched { border: 1px solid red; }
+    input.ng-valid.ng-touched { border: 1px solid green; }
+  </style>
+</head>
+<body>
+<div ng-app="formApp" ng-controller="formCtrl">
+  <form name="regForm">
+    <p>
+      Username:
+      <input name="username" ng-model="user.username" required>
+      <span ng-show="regForm.username.$touched && regForm.username.$invalid">
+        Username is required!
+      </span>
+    </p>
+    <p>
+      Email:
+      <input type="email" name="email" ng-model="user.email" required>
+      <span ng-show="regForm.email.$touched && regForm.email.$invalid">
+        Please enter a valid email!
+      </span>
+    </p>
+    <p>
+      Password:
+      <input type="password" name="password" ng-model="user.password" ng-minlength="6" required>
+      <span ng-show="regForm.password.$touched && regForm.password.$error.minlength">
+        Must be at least 6 characters!
+      </span>
+    </p>
+    <button ng-disabled="regForm.$invalid">Submit</button>
+  </form>
+  <h4>Live Preview:</h4>
+  <p>Username: {{ user.username }}</p>
+  <p>Email: {{ user.email }}</p>
+</div>
+<script>
+angular.module('formApp', []).controller('formCtrl', function($scope) {
+  $scope.user = {};
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="apiApp" ng-controller="apiCtrl">
+  <h2>{{ appTitle }}</h2>
+  <button ng-click="displayMsg()">Show Timed Message</button>
+  <p ng-show="showMsg">This disappears in 2 seconds!</p>
+  <p>Current Time: {{ time }}</p>
+  <p>Pretty Price: {{ prettyPrice }}</p>
+  <button ng-click="openGoogle()">Open Google</button>
+</div>
+<script>
+angular.module('apiApp', [])
+.controller('apiCtrl', function($scope, $rootScope, $timeout, $interval, $filter, $window) {
+  $rootScope.appTitle = "StartApp API Demo";
+
+  $scope.showMsg = false;
+  $scope.displayMsg = function() {
+    $scope.showMsg = true;
+    $timeout(function() {
+      $scope.showMsg = false;
+    }, 2000);
+  };
+
+  $scope.time = new Date().toLocaleTimeString();
+  $interval(function() {
+    $scope.time = new Date().toLocaleTimeString();
+  }, 1000);
+
+  $scope.price = 1234.567;
+  $scope.prettyPrice = $filter('currency')($scope.price, '$');
+
+  $scope.openGoogle = function() {
+    $window.open('https://www.google.com');
+  };
+});
+</script>
+</body>
+</html>

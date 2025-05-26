@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StartApp with W3.CSS</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="taskApp" ng-controller="taskCtrl" class="w3-container">
+  <h2 class="w3-text-blue">Task Manager</h2>
+  <form class="w3-container w3-light-grey w3-card-4 w3-margin-bottom" style="max-width:500px">
+    <div class="w3-section">
+      <label>New Task</label>
+      <input class="w3-input w3-border" ng-model="newTask" placeholder="Task name">
+    </div>
+    <button class="w3-button w3-blue w3-margin-bottom" ng-click="addTask()">Add Task</button>
+  </form>
+  <table class="w3-table w3-bordered w3-striped w3-card-4">
+    <tr>
+      <th>Task</th>
+      <th>Status</th>
+    </tr>
+    <tr ng-repeat="t in tasks">
+      <td>{{ t.name }}</td>
+      <td>
+        <span class="w3-tag" ng-class="{'w3-green': t.status=='done', 'w3-yellow': t.status=='open'}">
+          {{ t.status | uppercase }}
+        </span>
+      </td>
+    </tr>
+  </table>
+</div>
+<script>
+angular.module('taskApp', []).controller('taskCtrl', function($scope) {
+  $scope.tasks = [
+    { name: "Design logo", status: "open" },
+    { name: "Setup database", status: "done" },
+    { name: "Write docs", status: "open" }
+  ];
+  $scope.addTask = function() {
+    if ($scope.newTask) {
+      $scope.tasks.push({ name: $scope.newTask, status: "open" });
+      $scope.newTask = "";
+    }
+  };
+});
+</script>
+</body>
+</html>

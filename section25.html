@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AngularJS Includes Example</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="incApp" ng-controller="incCtrl">
+  <div ng-include="'header.html'"></div>
+  <div class="w3-row">
+    <div class="w3-col m2">
+      <div ng-include="'sidebar.html'"></div>
+    </div>
+    <div class="w3-col m10 w3-container">
+      <h4>Dashboard</h4>
+      <select ng-model="view">
+        <option value="'about.html'">About</option>
+        <option value="'contact.html'">Contact</option>
+      </select>
+      <div ng-include="view"></div>
+    </div>
+  </div>
+  <div ng-include="'footer.html'"></div>
+</div>
+<script>
+angular.module('incApp', []).controller('incCtrl', function($scope) {
+  $scope.view = "'about.html'";
+});
+</script>
+</body>
+</html>
