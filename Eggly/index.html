@@ -27,11 +27,28 @@
                         <!-- <input type="text" ng-model="hello"/>
                         <h1>{{hello}}</h1> -->
                         <button type="button" class="close">&times;</button>
-                        <button type="button" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button type="button" class="btn btn-link" ng-click="startEditing();"><span class="glyphicon glyphicon-pencil"></span></button>
                         <a href={{bookmark.url}} target="_blank">{{bookmark.title}}</a>
                     </div>
                     <hr/>
-                </div>
+
+                     <!-- CREATING -->
+                    <div ng-if="shouldShowCreating()">
+                        <button type="button" class="btn btn-link" ng-click="startCreating()">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Create Bookmark
+                        </button>
+                        <div ng-if="isCreating">
+                            Create a bookmark!
+                            <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelCreating()">Cancel</button>
+                        </div>
+                    </div>
+                    <!-- EDITING -->
+                    <div ng-if="shouldShowEditing()">
+                        Editing a bookmark!
+                        <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelEditing()">Cancel</button>
+                    </div>
+                    </div>
             </div>
         </div>
 
