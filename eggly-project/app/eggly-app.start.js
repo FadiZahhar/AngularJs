@@ -121,7 +121,15 @@ angular.module("Eggly", []).controller("MainCtrl", function ($scope) {
   $scope.updateBookmark = updateBookmark;
   $scope.isSelectedBookmark = isSelectedBookmark;
 
-  
+  // Delete a bookmark
+  function deleteBookmark(bookmark) {
+    _.remove($scope.bookmarks, function (b) {
+      return b.id == bookmark.id; // Remove the bookmark with the matching ID
+    });
+  }
+
+  $scope.deleteBookmark = deleteBookmark; //make available in the scope
+
   //CREATING AND EDITING STATES
 
   $scope.isCreating = false;
