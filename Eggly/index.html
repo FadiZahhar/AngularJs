@@ -15,14 +15,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                    <a href="#"><img class="logo" src="eggly-logo.png"></a>
+                    <a href="#" ng-click="setCurrentCategory(null)"><img class="logo" src="eggly-logo.png"></a>
                     <ul class="nav nav-sidebar">
-                        <li ng-repeat="category in categories"><a href="#">{{category.name}}</a></li>
+                        <li ng-repeat="category in categories" ng-class="{'active' : isCurrentCategory(category)}">
+                          <a ng-click="setCurrentCategory(category)">{{category.name}}</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main bookmark-rows">
                     <!-- <div ng-init="hello='world'"> -->
-                    <div ng-repeat="bookmark in bookmarks">
+                    <div ng-repeat="bookmark in bookmarks | filter:{category:currentCategory.name}">
                         <!-- <input type="text" ng-model="hello"/>
                         <h1>{{hello}}</h1> -->
                         <button type="button" class="close">&times;</button>
