@@ -22,7 +22,7 @@ angular.module('Eggly', [
           {"id": 8, "title": "Dump", "url": "http://dump.com", "category": "Humor" }
       ];
       $scope.currentCategory = null;
-
+      $scope.editedBookmark = null;
       function setCurrentCategory(category) {
         $scope.currentCategory = category;
         cancelCreating();
@@ -35,12 +35,29 @@ angular.module('Eggly', [
       $scope.setCurrentCategory = setCurrentCategory;
       $scope.isCurrentCategory = isCurrentCategory;
 
+      function resetCreateForm() {
+      $scope.newBookmark = {
+          title: '',
+          url: '',
+          category: $scope.currentCategory.name
+        }
+    }
+      function createBookmark(bookmark) {
+        bookmark.id = $scope.bookmarks.length;
+        $scope.bookmarks.push(bookmark);
+
+        resetCreateForm();
+    }
+
+    $scope.createBookmark = createBookmark;
+
       $scope.isCreating = false;
       $scope.isEditing = false;
 
       function startCreating() {
         $scope.isCreating = true;
         $scope.isEditing = false;
+        resetCreateForm();
     }
         function cancelCreating() {
             $scope.isCreating = false;
@@ -51,8 +68,12 @@ angular.module('Eggly', [
         }
         function cancelEditing() {
             $scope.isEditing = false;
+            $scope.editedBookmark = null;
         }
-
+        function cancelCreating() {
+            $scope.isCreating = false;
+        }
+  
         function shouldShowCreating() {
             return $scope.currentCategory && !$scope.isEditing;
         }
