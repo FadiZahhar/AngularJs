@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="taskApp" ng-controller="taskCtrl">
+  <input ng-model="taskName" placeholder="Type task">
+  <button ng-click="formatName()">Capitalize</button>
+  <p>Formatted: {{ taskName }}</p>
+</div>
+<script>
+  var app = angular.module('taskApp', []);
+  app.service('nameFormatter', function() {
+    this.capitalize = function(str) {
+      if (!str) return '';
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+  });
+  app.controller('taskCtrl', function($scope, nameFormatter) {
+    $scope.taskName = "";
+    $scope.formatName = function() {
+      $scope.taskName = nameFormatter.capitalize($scope.taskName);
+    };
+  });
+</script>
+</body>
+</html>

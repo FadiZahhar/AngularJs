@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="taskApp" ng-controller="taskCtrl">
+  <h2>Task List</h2>
+  <ul>
+    <li ng-repeat="t in tasks">{{ t.name }} - {{ t.status }}</li>
+  </ul>
+</div>
+<div ng-app="taskApp" ng-controller="addTaskCtrl">
+  <input ng-model="newTask" placeholder="New Task">
+  <button ng-click="addTask()">Add Task</button>
+</div>
+<script>
+  var app = angular.module('taskApp', []);
+  app.controller('taskCtrl', function($scope, $http) {
+    $http.get("get-tasks.php").then(function(response) {
+      $scope.tasks = response.data;
+    });
+  });
+  app.controller('addTaskCtrl', function($scope, $http) {
+    $scope.newTask = "";
+    $scope.addTask = function() {
+      if ($scope.newTask) {
+        $http.post("add-task.php", {name: $scope.newTask, status: 'open'})
+          .then(function(response) {
+            alert("Task added!");
+            $scope.newTask = "";
+          });
+      }
+    };
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="shopApp" ng-controller="prodCtrl">
+  <input ng-model="searchProduct" placeholder="Search products">
+  <select ng-model="sortKey">
+    <option value="name">Name</option>
+    <option value="price">Price</option>
+  </select>
+  <table border="1">
+    <tr>
+      <th>Name</th><th>Price</th>
+    </tr>
+    <tr ng-repeat="p in products | filter:searchProduct | orderBy:sortKey">
+      <td>{{ p.name }}</td>
+      <td>{{ p.price | currency }}</td>
+    </tr>
+  </table>
+</div>
+<script>
+var app = angular.module('shopApp', []);
+app.controller('prodCtrl', function($scope) {
+  $scope.products = [
+    {name: "Laptop", price: 999.99},
+    {name: "Mouse", price: 29.95},
+    {name: "Monitor", price: 199.50}
+  ];
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AngularJS SPA Routing Example</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+</head>
+<body ng-app="startApp">
+  <div class="w3-bar w3-blue">
+    <a href="#!/" class="w3-bar-item w3-button">Dashboard</a>
+    <a href="#!/tasks" class="w3-bar-item w3-button">Tasks</a>
+    <a href="#!/profile" class="w3-bar-item w3-button">Profile</a>
+  </div>
+  <div class="w3-container">
+    <div ng-view></div>
+  </div>
+<script>
+var app = angular.module('startApp', ['ngRoute']);
+app.config(function($routeProvider) {
+  $routeProvider
+    .when("/", {
+      templateUrl: "dashboard.html",
+      controller: "dashboardCtrl"
+    })
+    .when("/tasks", {
+      templateUrl: "tasks.html",
+      controller: "tasksCtrl"
+    })
+    .when("/profile", {
+      templateUrl: "profile.html",
+      controller: "profileCtrl"
+    })
+    .otherwise({
+      redirectTo: "/"
+    });
+});
+app.controller('dashboardCtrl', function($scope) {});
+app.controller('tasksCtrl', function($scope) {
+  $scope.tasks = [
+    { name: "Design logo" },
+    { name: "Setup database" },
+    { name: "Write docs" }
+  ];
+});
+app.controller('profileCtrl', function($scope) {
+  $scope.user = { name: "Lina", email: "lina@startapp.com" };
+});
+</script>
+</body>
+</html>

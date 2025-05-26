@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="formApp" ng-controller="formCtrl">
+  <h3>Register</h3>
+  <p>Country:</p>
+  <select ng-model="country" ng-options="c.name for c in countries">
+    <option value="">Select a country...</option>
+  </select>
+  <p ng-if="country">Selected country: {{ country.name }} ({{ country.code }})</p>
+  <p>Role:</p>
+  <select ng-model="role" ng-options="r for r in roles">
+    <option value="">Select a role...</option>
+  </select>
+  <p ng-if="role">Selected role: {{ role }}</p>
+</div>
+<script>
+angular.module('formApp', []).controller('formCtrl', function($scope) {
+  $scope.countries = [
+    { code: 'LB', name: 'Lebanon' },
+    { code: 'AE', name: 'UAE' },
+    { code: 'US', name: 'USA' }
+  ];
+  $scope.roles = ["Admin", "User", "Manager"];
+});
+</script>
+</body>
+</html>

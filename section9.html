@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="taskApp" ng-controller="parentCtrl">
+  <h3>{{ message }}</h3>
+  <div ng-controller="childCtrl">
+    <h4>{{ message }}</h4>
+  </div>
+</div>
+<script>
+  var app = angular.module('taskApp', []);
+  app.controller('parentCtrl', function($scope) {
+    $scope.message = "Welcome from the Parent Controller!";
+  });
+  app.controller('childCtrl', function($scope) {
+    // $scope.message = "Welcome from the Child Controller!";
+    // Uncomment the line above to override the parent's message
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+
+  <div ng-app ng-init="products=[
+  {name:'Laptop', price:999.95},
+  {name:'Phone', price:599.50},
+  {name:'Tablet', price:399.99}
+]">
+  <input ng-model="search">
+  <ul>
+    <li ng-repeat="p in products | filter:search | orderBy:'name'">
+      {{ p.name | uppercase }}: {{ p.price | currency }}
+    </li>
+  </ul>
+</div>
+
+<script>
+
+</script>
+</body>
+</html>
