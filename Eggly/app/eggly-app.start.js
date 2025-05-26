@@ -64,8 +64,32 @@ app.controller("mainCtrl", function ($scope) {
   $scope.setCurrentCategory = setCurrentCategory;
   $scope.isCurrentCategory = isCurrentCategory;
 
-  //CREATING AND EDITING STATES
+// ------------------
+// CRUD
+// ------------------
 
+function createBookmark(bookmark) {
+    bookmark.id = $scope.bookmarks.length;
+    $scope.bookmarks.push(bookmark);
+
+    resetCreateForm();
+}
+
+$scope.createBookmark = createBookmark;
+
+function resetCreateForm() {
+    $scope.newBookmark = {
+        title: '',
+        url: '',
+        category: $scope.currentCategory.name
+    };
+}
+// ------------------
+// CRUD
+// ------------------
+
+
+//CREATING AND EDITING STATES
 $scope.isCreating = false;
 $scope.isEditing = false;
 
@@ -104,4 +128,5 @@ $scope.cancelCreating = cancelCreating;
 $scope.cancelEditing = cancelEditing;
 $scope.shouldShowCreating = shouldShowCreating;
 $scope.shouldShowEditing = shouldShowEditing;
+
 });
