@@ -40,7 +40,7 @@
                         <button type="button" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
                         <a href="#" target="_blank">Bookmark</a>
                     </div> -->
-          <div
+          <div ng-class="{'active' :isSelectedBookmark(bookmark.id)}"
             ng-repeat="bookmark in bookmarks | filter: {category:currentCategory.name}"
           >
             <!-- <h1>{{hello}}</h1> -->
@@ -48,7 +48,7 @@
             <button type="button" class="close">&times;</button>
             <button
               type="button"
-              ng-click="startEditing();"
+              ng-click="setEditedBookmark(bookmark);startEditing();"
               class="btn btn-link"
             >
               <span class="glyphicon glyphicon-pencil"></span>
@@ -111,6 +111,48 @@
           <!--EDITING-->
 
           <div ng-if="shouldShowEditing()">
+            <h4>Editing {{editedBookmark.title}}</h4>
+
+            <form
+              class="edit-form"
+              role="form"
+              ng-submit="updateBookmark(editedBookmark)"
+              novalidate
+            >
+              <div class="form-group">
+                <label>Bookmark Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                
+                  ng-model="editedBookmark.title"
+                  placeholder="eEditedBookmark Title"
+                />
+              </div>
+
+              <div class="form-group">
+                <label> Bookmark URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+               
+                  ng-model="editedBookmark.url"
+                  placeholder="Bookmark URL"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-info btn-lg">Save</button>
+              <button
+                type="button"
+                class="btn btn-default btn-lg pull-right"
+                ng-click="cancelEditing()"
+              >
+                Cancel Create
+              </button>
+            </form>
+          </div>
+
+          <!-- <div ng-if="shouldShowEditing()">
             Edit a bookmark
             <button
               type="button"
@@ -119,7 +161,7 @@
             >
               Cancel Editing
             </button>
-          </div>
+          </div> -->
 
           <!-- <div ng-if="shouldShowEditing">
                         <button type="button" class="btn btn-link">
