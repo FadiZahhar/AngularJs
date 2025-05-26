@@ -23,9 +23,11 @@ $scope.bookmarks = [
 
     $scope.currentCategory = null;
 
-    
+
     function setCurrentCategory(category) {
         $scope.currentCategory = category;
+        cancelCreating();
+        cancelEditing();
     }
 
     function isCurrentCategory(category) {
@@ -35,4 +37,53 @@ $scope.bookmarks = [
     $scope.setCurrentCategory = setCurrentCategory;
     
     $scope.isCurrentCategory = isCurrentCategory;
+
+
+
+    
+//CREATING AND EDITING STATES
+
+$scope.isCreating = false;
+$scope.isEditing = false;
+
+function startCreating() {
+    $scope.isCreating = true;
+    $scope.isEditing = false;
+}
+
+
+function startEditing() {
+    $scope.isCreating = false;
+    $scope.isEditing = true;
+}
+
+function cancelCreating() {
+    $scope.isCreating = false;
+}
+
+function cancelEditing() {
+    $scope.isEditing = false;
+}
+
+
+function shouldShowCreating() {
+    return $scope.currentCategory && !$scope.isEditing;
+}
+
+function shouldShowEditing() {
+    return $scope.isEditing && !$scope.isCreating;
+}
+
+
+$scope.startCreating = startCreating;
+$scope.startEditing = startEditing;
+$scope.cancelCreating = cancelCreating;
+$scope.cancelEditing = cancelEditing;
+$scope.shouldShowCreating = shouldShowCreating;
+$scope.shouldShowEditing = shouldShowEditing;
+
 })
+
+
+
+

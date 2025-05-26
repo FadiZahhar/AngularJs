@@ -35,20 +35,45 @@
                      <!-- <h1>{{hello}}</h1> -->
                         <input type="text" ng-model="hello"> 
                         <button type="button" class="close">&times;</button>
-                        <button type="button" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
-                        <a href="{{book.ark.url}}" target="_blank">{{bookmark.title}}</a>
+                        <button type="button" ng-click="startEditing();" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <a href="{{bookmark.url}}" target="_blank">{{bookmark.title}}</a>
                     </div>
-                    <!-- <div>
-                        <button type="button" class="close">&times;</button>
-                        <button type="button" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
-                        <a href="#" target="_blank">Bookmark</a>
-                    </div>
-                    <div>
-                        <button type="button" class="close">&times;</button>
-                        <button type="button" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
-                        <a href="#" target="_blank">Bookmark</a>
-                    </div> -->
+
+
                     <hr/>
+
+                    <!--CREATING-->
+
+                    <div ng-if="shouldShowCreating()">
+                        <button type="button" class="btn btn-link" ng-click="startCreating();">
+                            <span class="glyphicon glyphicon-plus"></span> Create Bookmark
+                        </button>
+                        <div ng-if="isCreating">
+                            Create a bookmark
+                                  <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelCreating();">
+                      Cancel Create 
+                        </button>
+                        </div>
+                    </div>
+
+                    <!--EDITING-->
+
+                   
+                    <div ng-if="shouldShowEditing()">
+                        Edit a bookmark
+                            <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelEditing();">
+                      Cancel Editing 
+                        </button>
+                    </div>
+                    
+                    <!-- <div ng-if="shouldShowEditing">
+                        <button type="button" class="btn btn-link">
+                            <span class="glyphicon glyphicon-edit"></span> Edit Bookmark
+                        </button>
+                    </div> -->
+
+              
+
                 </div>
             </div>
         </div>
