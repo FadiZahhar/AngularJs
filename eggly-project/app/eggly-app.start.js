@@ -74,6 +74,29 @@ angular.module("Eggly", []).controller("MainCtrl", function ($scope) {
 
   $scope.isCurrentCategory = isCurrentCategory;
 
+    //create and edit state 
+  //CRUD
+
+  function resetCreateForm() {
+    $scope.newBookmark = { // Reset the newBookmark object
+      id: null, // Set ID to null for new bookmarks
+      title: "",
+      url: "",
+      category: $scope.currentCategory.name, 
+    };
+  }
+
+
+  function createBookmark(bookmark) {
+    bookmark.id = $scope.bookmarks.length; // Assign a new ID based on the current length of the bookmarks array
+    $scope.bookmarks.push(bookmark); // Add the new bookmark to the bookmarks array
+    resetCreateForm();
+  }
+
+  $scope.createBookmark = createBookmark;
+
+
+
   //CREATING AND EDITING STATES
 
   $scope.isCreating = false;
@@ -82,6 +105,8 @@ angular.module("Eggly", []).controller("MainCtrl", function ($scope) {
   function startCreating() {
     $scope.isCreating = true;
     $scope.isEditing = false;
+
+    resetCreateForm(); // Reset the form when starting to create a new bookmark
   }
 
   function startEditing() {
@@ -113,6 +138,7 @@ angular.module("Eggly", []).controller("MainCtrl", function ($scope) {
   $scope.shouldShowEditing = shouldShowEditing;
 
 
-  
+
+
 
 });
