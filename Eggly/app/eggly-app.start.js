@@ -70,6 +70,7 @@ app.controller("mainCtrl", function ($scope) {
 
 function createBookmark(bookmark) {
     bookmark.id = $scope.bookmarks.length;
+    bookmark.category = $scope.currentCategory.name;
     $scope.bookmarks.push(bookmark);
 
     resetCreateForm();
@@ -84,6 +85,27 @@ function resetCreateForm() {
         category: $scope.currentCategory.name
     };
 }
+
+$scope.editedBookmark = null;
+function setEditedBookmark(bookmark){
+   $scope.editedBookmark=angular.copy(bookmark);
+}
+ $scope.setEditedBookmark = setEditedBookmark;
+ 
+ function updateBookmark(bookmark) {
+  var index = _.findIndex($scope.bookmarks, function (b) {
+      return b.id == bookmark.id
+  });
+  $scope.bookmarks[index] = bookmark;
+
+  $scope.editedBookmark = null;
+  $scope.isEditing = false;
+}
+$scope.updateBookmark = updateBookmark;
+function isSelectedBookmark(bookmarkId) {
+    return $scope.editedBookmark !== null && $scope.editedBookmark.id === bookmarkId;
+}
+ $scope.isSelectedBookmark = isSelectedBookmark;
 // ------------------
 // CRUD
 // ------------------
