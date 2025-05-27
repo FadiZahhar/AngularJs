@@ -91,7 +91,7 @@ function setEditedBookmark(bookmark){
    $scope.editedBookmark=angular.copy(bookmark);
 }
  $scope.setEditedBookmark = setEditedBookmark;
- 
+
  function updateBookmark(bookmark) {
   var index = _.findIndex($scope.bookmarks, function (b) {
       return b.id == bookmark.id
@@ -106,6 +106,13 @@ function isSelectedBookmark(bookmarkId) {
     return $scope.editedBookmark !== null && $scope.editedBookmark.id === bookmarkId;
 }
  $scope.isSelectedBookmark = isSelectedBookmark;
+ 
+ function deleteBookmark(bookmark) {
+  _.remove($scope.bookmarks, function (b) {
+      return b.id == bookmark.id;
+  });
+}
+$scope.deleteBookmark = deleteBookmark;
 // ------------------
 // CRUD
 // ------------------
